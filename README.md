@@ -76,10 +76,10 @@
 #
 ### Step 3: Create Lambda Function (Python)
 
-  * Go to Lambda → Create function
-  * Name: saveContact
-  * Runtime: Python 3.11
-  * Permissions: Create a new role with basic Lambda permissions
+  * **Go to Lambda →** Create function
+  * **Name:** saveContact
+  * **Runtime:** Python 3.11
+  * **Permissions:** Create a new role with basic Lambda permissions
 #
 * **Lambda code**
 
@@ -111,7 +111,7 @@ def lambda_handler(event, context):
     }
 ```
 
-  * Click Deploy
+  * **Click Deploy**
 #
 
 
