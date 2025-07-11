@@ -67,4 +67,51 @@
 #
 ### Step 2: Create DynamoDB Table
 
+  * **Go to DynamoDB →** Create table
+  * **Table name:** ContactMessages
+  * **Partition key:** email (String)
+  * **Sort key:** timestamp (String)
+  * **Default settings →** Create
+
+#
+### Step 3: Create Lambda Function (Python)
+
+  * Go to Lambda → Create function
+  * Name: saveContact
+  * Runtime: Python 3.11
+  * Permissions: Create a new role with basic Lambda permissions
+#
+* **Lambda code**
+
+```
+  import json
+import boto3
+from datetime import datetime
+
+dynamodb = boto3.resource('dynamodb')
+table = dynamodb.Table('ContactMessages')
+
+def lambda_handler(event, context):
+    body = json.loads(event['body'])
+
+    table.put_item(Item={
+        'email': body['email'],
+        'timestamp': datetime.utcnow().isoformat(),
+        'name': body['name'],
+        'message': body['message']
+    })
+
+    return {
+        'statusCode': 200,
+        'headers': {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': '*'
+        },
+        'body': json.dumps({'message': 'Success'})
+    }
+```
+
+  * Click Deploy
+#
+
 
